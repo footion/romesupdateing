@@ -1,12 +1,6 @@
 eclipse.preferences.version=1
 encoding//src/Dao/ReceivedOrderDAO.java=UTF-8
 encoding//src/components/imagelabel/ImageLabel.java=UTF-8
-encoding//src/entity/CommonCode.java=UTF-8
-encoding//src/entity/Company.java=UTF-8
-encoding//src/entity/StoredReleased.java=UTF-8
-encoding//src/entity/dao/CommonCodeDAO.java=UTF-8
-encoding//src/entity/dao/DynamicDAO.java=UTF-8
-encoding//src/entity/dao/SRHistoryDAO.java=UTF-8
 encoding//src/page/storing/SortingPanel.java=UTF-8
 encoding//src/pages/order=UTF-8
 encoding//src/pages/product=UTF-8

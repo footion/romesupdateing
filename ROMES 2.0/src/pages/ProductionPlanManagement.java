@@ -15,6 +15,7 @@ import Dao.ProductionPlanDAO;
 import entity.BomEntity;
 import entity.ProductionPlan;
 import entity.Received_order_history;
+import eventListener.PP_SimulationEvent;
 import factory.miniTableFactory;
 import hibernate.hibernate;
 import layoutSetting.basicBorderPanel;
@@ -71,7 +72,7 @@ public class ProductionPlanManagement extends basicTabbedPane{
 		});
 	}
 	private void setEvent() {
-		// TODO Auto-generated method stub
+		simulation.addActionListener(new PP_SimulationEvent(this));
 		
 	}
 	private String checkingMaterial(ProductionPlan plan) {

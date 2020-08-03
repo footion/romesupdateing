@@ -27,4 +27,30 @@ public class method {
 		}
 		return component;
 	}
+	public static String parseTime(int Sec) {
+		int hours = Sec /3600;
+		hours%=24;
+		Sec%=3600;
+		int minutes = Sec/60;
+		int sec = Sec%60;
+		return hours+":"+minutes+":"+sec;
+	}
+	public static int getSec(String time) {
+		// TODO Auto-generated method stub
+		if(time.split(":").length>2) {
+			String hourString = time.split(":")[0];
+			String minuteString = time.split(":")[1];
+			String secString = time.split(":")[2];
+			final int hours= Integer.parseInt(hourString)*3600;
+			final int minutes= Integer.parseInt(minuteString)*60;
+			final int sec= (int)Double.parseDouble(secString);
+			return hours+minutes+sec;
+		}else {
+			String hourString = time.split(":")[0];
+			String minuteString = time.split(":")[1];
+			final int hours= Integer.parseInt(hourString)*3600;
+			final int minutes= Integer.parseInt(minuteString)*60;
+			return hours+minutes;
+		}
+	}
 }
