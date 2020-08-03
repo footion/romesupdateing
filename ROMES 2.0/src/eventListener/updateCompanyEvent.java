@@ -20,7 +20,7 @@ import factory.ImgFactory;
 import factory.nameFactory;
 import functions.managerProfile;
 import hibernate.hibernate;
-import layoutSetting.ImageLabel;
+import layoutSetting.ImageLabel_HJ;
 import layoutSetting.basicTabbedPane;
 import layoutSetting.basicTextArea;
 import message.errorMessage;
@@ -66,7 +66,7 @@ public class updateCompanyEvent implements ActionListener{
 		}
 	}
 	void updateCompanyImage(Company company){
-		ImageLabel imageLabel=CompanyRegistration.getImageLabel();
+		ImageLabel_HJ imageLabel=CompanyRegistration.getImageLabel();
 		if(imageLabel.getImgPath()!=null) {
 			company.setImage(ImgFactory.ImgToBytes(imageLabel.getImgPath()));
 		}

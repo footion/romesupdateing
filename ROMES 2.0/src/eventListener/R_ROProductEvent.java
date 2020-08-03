@@ -9,11 +9,11 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JOptionPane;
 
-import registrationForm.R_ROProduct;
+import registrationForm.R_ProductFrame;
 
 public class R_ROProductEvent implements ActionListener,MouseListener,KeyListener{
-	R_ROProduct component;
-	public R_ROProductEvent(R_ROProduct R_ROProduct) {
+	R_ProductFrame component;
+	public R_ROProductEvent(R_ProductFrame R_ROProduct) {
 		component=R_ROProduct;
 		component.cancelBtn.addActionListener(new cancelEvent(component));
 	}

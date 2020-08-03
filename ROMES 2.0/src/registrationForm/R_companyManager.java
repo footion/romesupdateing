@@ -21,7 +21,7 @@ import factory.nameFactory;
 import factory.stringFactory;
 import image.icon;
 import image.url;
-import layoutSetting.ImageLabel;
+import layoutSetting.ImageLabel_HJ;
 import layoutSetting.basicBorderPanel;
 import layoutSetting.basicFrame;
 import layoutSetting.basicLabel;
@@ -38,7 +38,7 @@ public class R_companyManager extends basicFrame{
 	basicLabel name;
 	public basicPanel leftNorth;
 	public Box centerBox;
-	private ImageLabel imageLabel;
+	private ImageLabel_HJ imageLabel;
 	public basicBorderPanel profilePhoto;
 	public int imageWidth=99;
 	public int imageHeight=110;
@@ -66,7 +66,7 @@ public class R_companyManager extends basicFrame{
 		profilePhoto = new basicBorderPanel();
 		LineBorder border = new LineBorder(Color.LIGHT_GRAY, 3);
 		profilePhoto.setBorder(border);
-		profilePhoto.add(imageLabel = new ImageLabel(url.USER_ICON));
+		profilePhoto.add(imageLabel = new ImageLabel_HJ(url.USER_ICON));
 		imageLabel.setImageSize(imageWidth, imageHeight);
 		
 		northPanel.add(leftNorth);
@@ -110,10 +110,10 @@ public class R_companyManager extends basicFrame{
 		btnPanel.rightBtn.addActionListener(new cancelEvent(this));
 		imageLabel.addMouseListener(new ImageSelectEvent(this, imageLabel, imageHeight, imageHeight));
 	}
-	public ImageLabel getImageLabel() {
+	public ImageLabel_HJ getImageLabel() {
 		return imageLabel;
 	}
-	public void setImageLabel(ImageLabel imageLabel) {
+	public void setImageLabel(ImageLabel_HJ imageLabel) {
 		this.imageLabel = imageLabel;
 	}
 }

@@ -30,13 +30,13 @@ public class ShowOderspanel extends JPanel {
 
 	/**
 	 * Create the panel.
+	 * 
 	 * @param superPanel
 	 */
 	public ShowOderspanel(ShowOrderPanelMaster superPanel) {
 		getDatas();
 		this.superPanel = superPanel;
-		
-		
+
 		String columns[] = { "pkey", "LOTNO", "제품", "주문량", "발주사", "주문날짜", "도착예정날짜", "작업자" };
 		DefaultTableModel model = new DefaultTableModel(columns, 0) {
 			// Returning the Class of each column will allow different // renderers to be
@@ -102,7 +102,6 @@ public class ShowOderspanel extends JPanel {
 	private void getDatas() {
 		OrderHistoryDAO dao = new OrderHistoryDAO();
 		this.list = dao.getOrderHistory();
-		list.forEach(e-> System.out.println(e));
 
 	}
 

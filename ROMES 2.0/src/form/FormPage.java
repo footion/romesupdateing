@@ -58,9 +58,8 @@ public class FormPage extends basicPanel {
 	}
 	/**
 	 * Create the panel.
-	 * @param productKey 
 	 */
-	public FormPage(int productKey) {
+	public FormPage() {
 		gettingData();
 		setBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EmptyBorder(10, 10, 10, 10)));
 		setLayout(new FormLayout(new ColumnSpec[] {

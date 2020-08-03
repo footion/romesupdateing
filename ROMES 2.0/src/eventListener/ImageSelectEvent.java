@@ -8,18 +8,18 @@ import java.io.File;
 import javax.swing.JFileChooser;
 
 import factory.ImgFactory;
-import layoutSetting.ImageLabel;
+import layoutSetting.ImageLabel_HJ;
 
 public class ImageSelectEvent implements MouseListener{
-	ImageLabel imageLabel;
+	ImageLabel_HJ imageLabel;
 	int width=120;
 	int height=90;
 	Container container;
-	public ImageSelectEvent(Container container,ImageLabel imageLabel) {
+	public ImageSelectEvent(Container container,ImageLabel_HJ imageLabel) {
 		this.imageLabel=imageLabel;
 		this.container=container;
 	}
-	public ImageSelectEvent(Container container,ImageLabel imageLabel,int width, int height) {
+	public ImageSelectEvent(Container container,ImageLabel_HJ imageLabel,int width, int height) {
 		this.imageLabel=imageLabel;
 		this.container=container;
 		this.width=width;

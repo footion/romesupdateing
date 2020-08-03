@@ -2,7 +2,6 @@ package eventListener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -10,13 +9,13 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
 
-import entity.Received_order_history;
 import entity.Company;
 import entity.Company_manager;
-import entity.ReceivedOrderProduct;
+import entity.ProductionPlan;
 import entity.PurchasePrice;
+import entity.ReceivedOrderProduct;
+import entity.Received_order_history;
 import hibernate.hibernate;
 import layoutSetting.miniTable;
 import message.errorMessage;
@@ -89,6 +88,17 @@ public class deleteRowEvent implements ActionListener{
 						deleteRow();
 					}
 				} catch (ClassCastException e) {
+					deleteRow();
+				}
+			}else if(Type=="PRODUCTIONPLAN") {
+				int n =Table.getSelectedRow();
+				int key = (int)Table.getValueAt(n, 0);
+				ProductionPlan plan = session.get(ProductionPlan.class, key);
+				int confirm = confirmMSG(plan.getReceivedOrder().getTitle()+"-"+plan.getROproduct().getProduct().getName());
+				if(confirm==0) {
+					plan.getReceivedOrder().setProductPlan(false);
+					session.update(plan.getReceivedOrder());
+					session.delete(plan);
 					deleteRow();
 				}
 			}

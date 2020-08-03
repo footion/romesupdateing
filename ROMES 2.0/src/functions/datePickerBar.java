@@ -27,8 +27,8 @@ import layoutSetting.colonLabel;
 @SuppressWarnings("serial")
 public class datePickerBar extends basicPanel{
 	public JTextField text;
-	JButton button;
-	JDatePickerImpl datepicker;
+	public JButton button;
+	public JDatePickerImpl datepicker;
 	public datePickerBar(String labelText,int textSize,String textName) {
 		drawDatePicker();
 		for (int i = 0; i < datepicker.getComponentCount(); i++) {
@@ -69,6 +69,7 @@ public class datePickerBar extends basicPanel{
 				button.setIcon(new icon(url.CALENDAR_ICON, 19, 19));
 			} else if (com instanceof JTextField) {
 				text = (JTextField) com;
+				new basicTextField(0).setTextField(text);
 			}
 		}
 		this.add(datepicker);

@@ -26,7 +26,7 @@ import entity.Company;
 import factory.stringFactory;
 import hibernate.hibernate;
 import layoutSetting.basicTabbedPane;
-import layoutSetting.ImageLabel;
+import layoutSetting.ImageLabel_HJ;
 import message.errorMessage;
 import registrationForm.R_company;
 import registrationForm.R_purchasePrice;

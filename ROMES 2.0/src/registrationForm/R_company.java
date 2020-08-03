@@ -36,7 +36,7 @@ import layoutSetting.basicPanel;
 import layoutSetting.basicTabbedPane;
 import layoutSetting.colonLabel;
 import layoutSetting.doubleButtonPanel;
-import layoutSetting.ImageLabel;
+import layoutSetting.ImageLabel_HJ;
 import layoutSetting.titleBorderPanel;
 
 @SuppressWarnings("serial")
@@ -53,7 +53,7 @@ public class R_company extends basicPanel{
 	public int imageWidth=185;
 	public int imageHeight=140;
 	basicTabbedPane TabbedPane;
-	private ImageLabel imageLabel;
+	private ImageLabel_HJ imageLabel;
 	
 	public R_company(basicTabbedPane tabbedPane) {
 		TabbedPane=tabbedPane;
@@ -78,7 +78,7 @@ public class R_company extends basicPanel{
 		imagePanel.setBorder(new LineBorder(colorFactory.BORDER_COLOR, 1));
 		parentPanel.add(componentFactory.addEmptyLabel(),BorderLayout.NORTH);
 		parentPanel.add(componentFactory.addEmptyLabel(),BorderLayout.EAST);
-		imageLabel = new ImageLabel(url.IMAGE_ICON);
+		imageLabel = new ImageLabel_HJ(url.IMAGE_ICON);
 		imageLabel.setImageSize(imageWidth, imageHeight);
 		imagePanel.add(imageLabel);
 		parentPanel.add(imagePanel,BorderLayout.CENTER);
@@ -177,10 +177,10 @@ public class R_company extends basicPanel{
 		basicPanel panel =(basicPanel) componentFactory.createInputBar(labelText, textSize, textName);
 		return panel;
 	}
-	public ImageLabel getImageLabel() {
+	public ImageLabel_HJ getImageLabel() {
 		return imageLabel;
 	}
-	public void setImageLabel(ImageLabel imageLabel) {
+	public void setImageLabel(ImageLabel_HJ imageLabel) {
 		this.imageLabel = imageLabel;
 	}
 }

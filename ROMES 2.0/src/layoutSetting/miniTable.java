@@ -8,6 +8,9 @@ import javax.swing.border.BevelBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
+import GroupColum.Table.Group_Column;
+import GroupColum.Table.Group_TableColumnModel;
+import GroupColum.Table.Group_TableHeader;
 import factory.colorFactory;
 import factory.fontFactory;
 
@@ -28,17 +31,17 @@ public class miniTable extends JScrollPane {
 		};
 		setting();
 	}
-	public miniTable(String[] col, int setEditableColumn,String type) {
+	public miniTable(String[] col, int setEditFalseColumn,String type) {
 		model = new DefaultTableModel(col, 0);
 		// use groupcolumn --> table=new JTable();
 		table = new JTable(model) {
 			@Override
 			// first column editable(false);
 			public boolean isCellEditable(int row, int column) {
-				if (type.equals("RO")&&column==4) {
+				if (type!=null&&type.equals("RO")&&column==4) {
 					return false;
 				}
-				if (column == setEditableColumn) {
+				if (column == setEditFalseColumn) {
 					return false;
 				} else
 					return true;
@@ -76,7 +79,19 @@ public class miniTable extends JScrollPane {
 		};
 		setting();
 	}
-
+	public miniTable(String[] col,int btn1,int btn2, String GroupColumnType) {
+		model = new DefaultTableModel(col, 0);
+		table = new JTable() {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				if(column==btn1||column==btn2) {
+					return false;
+				}else
+					return true;
+			}
+		};
+		setting();
+	}
 	public void setLineVisible(boolean visible) {
 		table.setShowVerticalLines(visible);
 		table.setShowHorizontalLines(visible);

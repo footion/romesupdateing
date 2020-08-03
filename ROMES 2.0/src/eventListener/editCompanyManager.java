@@ -13,15 +13,14 @@ import javax.swing.JTextField;
 import factory.ImgFactory;
 import factory.nameFactory;
 import functions.managerProfile;
-import functions.method;
-import layoutSetting.ImageLabel;
+import layoutSetting.ImageLabel_HJ;
 import layoutSetting.basicTextArea;
 import registrationForm.R_companyManager;
 
 public class editCompanyManager implements ActionListener{
 	Container Container;
 	managerProfile profile;
-	ImageLabel imageLabel;
+	ImageLabel_HJ imageLabel;
 	Container leftNorth;
 	Container centerBox;
 //	public editCompanyManager(Container container, managerProfile managerProfile) {

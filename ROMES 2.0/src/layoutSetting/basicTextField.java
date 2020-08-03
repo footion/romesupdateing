@@ -23,7 +23,7 @@ public class basicTextField extends JTextField{
 	}
 	public void setTextField(JTextField textField) {
 		BevelBorder bevelBorder = new BevelBorder(BevelBorder.LOWERED);
-		textField.setFont(new Font(fontFactory.BASIC_FONT,Font.PLAIN,14));
+		//textField.setFont(new Font(fontFactory.BASIC_FONT,Font.PLAIN,14));
 		textField.setBorder(bevelBorder);
 		textField.setBackground(colorFactory.TEXTFIELD_COLOR);
 		//textField.setPreferredSize(new Dimension(80,30));

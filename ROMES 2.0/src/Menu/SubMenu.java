@@ -19,14 +19,12 @@ import Login.login_management;
 import factory.fontFactory;
 import mainFrame.lodingFrame;
 import mainFrame.mainFrame;
-import page.storing.SortingPanel;
 import pages.CommonCodePage;
+import pages.ProcessManagement;
 import pages.ProductionPlanManagement;
 import pages.companyManagement;
 import pages.ReceivedOrderManagement;
 import pages.purchasePriceManagement;
-import pages.order.ShowOrderPanelMaster;
-import pages.product.ShowProductsPanel;
 
 @SuppressWarnings("serial")
 public class SubMenu extends JLabel implements MouseListener{
@@ -113,6 +111,15 @@ public class SubMenu extends JLabel implements MouseListener{
 					}
 				}
 				break;
+			case "공정마스터":
+				ClassName = "ProcessManagement";
+				mainFrame.title.setText(SubMenuName);
+				for(Component c : container.getComponents()) {
+					if(c.getName()!=null&&c.getName().equals(ClassName)) {
+						((ProcessManagement)c).refresh();
+					}
+				}
+				break;
 			case "공통 코드":
 				ClassName = "CommonCodePage";
 				mainFrame.title.setText(SubMenuName);
@@ -134,26 +141,23 @@ public class SubMenu extends JLabel implements MouseListener{
 				}else {
 					JOptionPane.showMessageDialog(null, "권한이 없는 사용자입니다.","권한이 없는 사용자",JOptionPane.WARNING_MESSAGE);
 				}
-				break;
-			case "원자재마스터":{
 				
-				mainFrame.Container.add(new ShowProductsPanel(),"ProductShow");
-				ClassName = "ProductShow";
-				mainFrame.title.setText("원자재마스터");
-			}break;
+				break;
 			case "로그 기록":
 				ClassName="LogHistory";
 				mainFrame.title.setText("로그 기록");
 				log_history.refresh();
 				break;
-				
+			case "원자재마스터":{
+				ClassName = "ProductShow";
+				mainFrame.title.setText("원자재마스터");
+			}break;
 			case "입고/출고":{
 				ClassName = "showStoring";
 				mainFrame.title.setText("입고/출고");
 			}
 			break;
 			case "발주 관리":{
-				mainFrame.Container.add(new ShowOrderPanelMaster(),"orderHistory");
 				ClassName = "orderHistory";
 				mainFrame.title.setText("발주 관리");
 			}

@@ -7,6 +7,7 @@ import layoutSetting.basicLabel;
 import layoutSetting.basicPanel;
 import layoutSetting.basicTabbedPane;
 import layoutSetting.basicTextArea;
+import layoutSetting.basicTextField;
 import layoutSetting.colonLabel;
 import layoutSetting.miniTable;
 
@@ -73,10 +74,10 @@ import javax.swing.UIManager;
 @SuppressWarnings("serial")
 public class R_receivedOrder extends basicPanel{
 	private JTextField titleText;
-	private JTextField managerText;
+	private basicTextField managerText;
 	private JComboBox orderTypeCombo;
-	private JTextField companyText;
-	private JTextField orderDateText;
+	private basicTextField companyText;
+	private basicTextField orderDateText;
 	private JTextField deadLineText;
 	private basicTextArea remarksText;
 	private miniTable minitable;
@@ -91,6 +92,7 @@ public class R_receivedOrder extends basicPanel{
 	basicBtn cancelBtn;
 	private basicIconBtn userInfoBtn;
 	private basicIconBtn companyInfoBtn;
+	private JButton datepickerBtn;
 	public R_receivedOrder(basicTabbedPane tabbedPane) {
 		TabbedPane= tabbedPane;
 		setLayout(new BorderLayout(0,7));
@@ -129,7 +131,6 @@ public class R_receivedOrder extends basicPanel{
 		titleText.setForeground(Color.LIGHT_GRAY);
 		titleText.setBorder(null);
 		titleText.setHorizontalAlignment(SwingConstants.CENTER);
-		titleText.setText("OL200724150215");
 		titlePanel.add(titleText, "4, 1, fill, default");
 		
 		dataPanel = new basicPanel();
@@ -148,6 +149,7 @@ public class R_receivedOrder extends basicPanel{
 				FormSpecs.DEFAULT_COLSPEC,
 				FormSpecs.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("default:grow"),
+				FormSpecs.DEFAULT_COLSPEC,
 				FormSpecs.RELATED_GAP_COLSPEC,
 				FormSpecs.DEFAULT_COLSPEC,},
 			new RowSpec[] {
@@ -161,7 +163,7 @@ public class R_receivedOrder extends basicPanel{
 		JLabel managerLabel = new JLabel("\uB2F4\uB2F9\uC790 :");
 		dataPanel.add(managerLabel, "3, "+locationheight+", right, default");
 		
-		managerText = new JTextField();
+		managerText = new basicTextField(0);
 		dataPanel.add(managerText, "5, "+locationheight+", fill, default");
 		managerText.setColumns(10);
 		
@@ -174,7 +176,7 @@ public class R_receivedOrder extends basicPanel{
 		JLabel orderDateLabel = new JLabel("\uC8FC\uBB38 \uB0A0\uC9DC :");
 		dataPanel.add(orderDateLabel, "10, 2, right, default");
 	
-		orderDateText = new JTextField();
+		orderDateText = new basicTextField(0);
 		dataPanel.add(orderDateText, "12, 2, fill, default");
 		
 		JLabel orderTypeLabel = new JLabel("\uACC4\uC57D \uC720\uD615 :");
@@ -188,12 +190,12 @@ public class R_receivedOrder extends basicPanel{
 		
 		datePickerBar datePickerBar = new datePickerBar();
 		deadLineText = datePickerBar.text;
-		dataPanel.add(datePickerBar, "12, 4, fill, default");
+		dataPanel.add(datePickerBar.datepicker, "12, 4, fill, default");
 		
 		JLabel companyLabel = new JLabel("\uC8FC\uBB38 \uC5C5\uCCB4 :");
 		dataPanel.add(companyLabel, "3, "+(locationheight+4)+", right, default");
 		
-		companyText = new JTextField();
+		companyText = new basicTextField(0);
 		dataPanel.add(companyText, "5, "+(locationheight+4)+", fill, default");
 		companyText.setColumns(10);
 		
@@ -215,7 +217,7 @@ public class R_receivedOrder extends basicPanel{
 		pageEndPanel.setLayout(new BorderLayout());
 		
 		minitable = new miniTableFactory().ReceivedOrderProductTable();
-		minitable.setPreferredSize(new Dimension(0,320));
+		minitable.setPreferredSize(new Dimension(0,300));
 		pageEndPanel.add(minitable,BorderLayout.NORTH);
 		//TotalPrice
 		totalPrice =new totalPrice(minitable.table, priceColNum,quantityColNum);
@@ -231,12 +233,13 @@ public class R_receivedOrder extends basicPanel{
 		String[] colcombo = {"","견적 요청","주문 확정"};
 		JComboBox combo = new JComboBox();
 		combo = new JComboBox(colcombo);
+		combo.setFont(null);
 		BevelBorder bevelBorder = new BevelBorder(BevelBorder.LOWERED);
 		combo.setBorder(bevelBorder);
 		//combo center align
-		DefaultListCellRenderer listRenderer = new DefaultListCellRenderer();
-	    listRenderer.setHorizontalAlignment(DefaultListCellRenderer.CENTER);
-	    combo.setRenderer(listRenderer);
+//		DefaultListCellRenderer listRenderer = new DefaultListCellRenderer();
+//	    listRenderer.setHorizontalAlignment(DefaultListCellRenderer.CENTER);
+//	    combo.setRenderer(listRenderer);
 		combo.setSelectedIndex(0);
 		combo.setBackground(colorFactory.TEXTFIELD_COLOR);
 		return combo;
@@ -256,6 +259,8 @@ public class R_receivedOrder extends basicPanel{
 		//companyText
 		companyText.setName(nameFactory.ORDER_CLIENT_TN);
 		companyText.setEditable(false);
+		//titleText
+		titleText.setText("OL"+new SimpleDateFormat("yyMMdd-hhmmss").format(new Date()));
 	}
 	void setEvent() {
 		cancelBtn.addActionListener(new cancelEvent(TabbedPane,this));
@@ -304,29 +309,8 @@ public class R_receivedOrder extends basicPanel{
 	public JTextField getTitleText() {
 		return titleText;
 	}
-	public JTextField getManagerText() {
-		return managerText;
-	}
-	public JComboBox getOrderTypeCombo() {
-		return orderTypeCombo;
-	}
-	public JTextField getCompanyText() {
-		return companyText;
-	}
-	public JTextField getOrderDateText() {
-		return orderDateText;
-	}
-	public JTextField getDeadLineText() {
-		return deadLineText;
-	}
-	public JTextArea getRemarksText() {
-		return remarksText.textArea;
-	}
 	public miniTable getMinitable() {
 		return minitable;
-	}
-	public basicPanel getDataPanel() {
-		return dataPanel;
 	}
 	public basicBtn getSaveBtn() {
 		return saveBtn;

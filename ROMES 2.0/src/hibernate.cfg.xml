@@ -52,8 +52,8 @@
 		<mapping class="entity.ProductCommonInfo" />
 		<mapping class="entity.PurchasePrice" />
 		<mapping class="entity.CommonCode" />
-		<mapping class="entity.OrderHistory" />
-		<mapping class="entity.Worker" />
+		<mapping class="entity.ProductionPlan" />
+		<mapping class="entity.ProcessMaster" />
 	</session-factory>
 
 </hibernate-configuration>

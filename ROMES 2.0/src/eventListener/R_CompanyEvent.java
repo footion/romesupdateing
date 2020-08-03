@@ -31,7 +31,7 @@ import hibernate.config;
 import hibernate.hibernate;
 import layoutSetting.basicTabbedPane;
 import layoutSetting.basicTextArea;
-import layoutSetting.ImageLabel;
+import layoutSetting.ImageLabel_HJ;
 import message.errorMessage;
 import message.successMessage;
 import pages.companyManagement;
@@ -81,7 +81,7 @@ public class R_CompanyEvent implements ActionListener{
 		}
 	}
 	void saveCompanyImage(Company company){
-		ImageLabel imageLabel=RegistrationFrame.getImageLabel();
+		ImageLabel_HJ imageLabel=RegistrationFrame.getImageLabel();
 		if(imageLabel.getImgPath()!=null) {
 			company.setImage(ImgFactory.ImgToBytes(imageLabel.getImgPath()));	
 		}

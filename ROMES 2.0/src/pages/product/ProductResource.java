@@ -5,10 +5,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -20,8 +17,7 @@ import javax.swing.JTextField;
 import entity.BuildingNames;
 import entity.ProductType;
 import evevtListener.textFieldEvent;
-import factory.stringFactory;
-import pages.location.LocationResources;
+import factory.nameFactory;
 import pages.utils.ColoredPanel;
 
 public class ProductResource {
@@ -95,7 +91,7 @@ public class ProductResource {
 		inOutBtPanel = new ColoredPanel();
 		setInOutPanel();
 		companyField.addMouseListener(new textFieldEvent());
-		companyField.setName(stringFactory.ORDER_CLIENT_TN);
+		companyField.setName(nameFactory.ORDER_CLIENT_TN);
 
 		modifyButton = new JButton(ProductResource.saveButtonString);
 		makeBOMButton = new JButton(ProductResource.bomString);

@@ -5,25 +5,37 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.border.EmptyBorder;
 
+import org.hibernate.Session;
+
+import Dao.ProductionPlanDAO;
+import entity.BomEntity;
+import entity.ProductionPlan;
+import entity.Received_order_history;
 import factory.miniTableFactory;
+import hibernate.hibernate;
 import layoutSetting.basicBorderPanel;
 import layoutSetting.basicBtn;
 import layoutSetting.basicPanel;
 import layoutSetting.basicTabbedPane;
 import layoutSetting.miniTable;
+import message.errorMessage;
+import message.successMessage;
 import registrationForm.R_ProductionPlan;
 
 @SuppressWarnings("serial")
 public class ProductionPlanManagement extends basicTabbedPane{
-	public miniTable miniTable;
+	private miniTable miniTable;
 	basicBtn register;
 	basicBtn emergency;
 	basicBtn simulation;
 	basicBtn workorder;
+	ProductionPlanManagement planManagement;
 	public ProductionPlanManagement() {
+		planManagement=this;
 		miniTable = new miniTableFactory().ProductionPlanManagement(this);
 		basicBorderPanel northPanel = new basicBorderPanel(Color.LIGHT_GRAY,2);
 		northPanel.setLayout(new BorderLayout());
@@ -50,18 +62,11 @@ public class ProductionPlanManagement extends basicTabbedPane{
 		this.addTab("»ý»ê °èÈ¹", panel);
 		
 		setEvent();
-		
-		miniTable.model.addRow(new Object[] {"","","","","","","","","",""});
-		miniTable.model.addRow(new Object[] {"","","","","","","","","",""});
-		miniTable.model.addRow(new Object[] {"","","","","","","","","",""});
-		miniTable.model.addRow(new Object[] {"","","","","","","","","",""});
+		StartData();
 		
 		register.addActionListener(new ActionListener() {
-			
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				new R_ProductionPlan("Select Order");
-				
+				new R_ProductionPlan(planManagement);
 			}
 		});
 	}
@@ -69,12 +74,49 @@ public class ProductionPlanManagement extends basicTabbedPane{
 		// TODO Auto-generated method stub
 		
 	}
+	private String checkingMaterial(ProductionPlan plan) {
+		if(plan.getMaterial()==null) {
+			return "";
+		}else {
+			return plan.getMaterial().getName();
+		}
+	}
+	private String checkingQuantity(ProductionPlan plan) {
+		if(plan.getMaterial()==null) {
+			return plan.getROproduct().getQuantity();
+		}else {
+			for(BomEntity bom :plan.getROproduct().getProduct().getBoms()) {
+				if(bom.getMeterial().equals(plan.getMaterial())) {
+					int materialQuantity=bom.getCount();
+					int finalQuantity=materialQuantity*(Integer.parseInt(plan.getROproduct().getQuantity()));
+					return Integer.toString(finalQuantity);
+				}
+			}
+			return "error";
+		}
+	}
 	private void StartData() {
-		// TODO Auto-generated method stub
-		
+		try (Session session = hibernate.factory.openSession()){
+			hibernate.transaction = session.beginTransaction();
+			ArrayList<ProductionPlan> plans = (ArrayList<ProductionPlan>)session.createCriteria(ProductionPlan.class).list();
+			for(ProductionPlan plan : plans) {
+				Received_order_history RO= plan.getReceivedOrder();
+				miniTable.model.addRow(new Object[] {plan.getId(),miniTable.model.getRowCount()+1
+						,plan.getProductionLine(),RO.getTitle(),"",plan.getROproduct().getProduct().getName()
+						,checkingMaterial(plan),plan.getROproduct().getLotNo(),checkingQuantity(plan)
+						,RO.getOrder_date(),RO.getDeadline(),"","","",RO.getRemarks(),""});	
+			}
+			hibernate.transaction.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			new errorMessage("load data");
+		}
 	}
 	public void refresh() {
-		// TODO Auto-generated method stub
-		
+		miniTable.model.setRowCount(0);
+		StartData();
+	}
+	public miniTable getMiniTable() {
+		return miniTable;
 	}
 }

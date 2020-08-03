@@ -18,4 +18,11 @@ public class instanceofFactory {
 			return false;
 		}
 	}
+	public static String removeNull(String string) {
+		if(string == null) {
+			return "";
+		}else {
+			return string;
+		}
+	}
 }

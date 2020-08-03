@@ -4,10 +4,14 @@ import java.awt.Dimension;
 
 import javax.swing.JTable;
 
+import GroupColum.Table.Group_Column;
+import GroupColum.Table.Group_TableColumnModel;
+import GroupColum.Table.Group_TableHeader;
 import eventListener.InfoBtnEvent_PurchasePrice;
 import eventListener.deleteRowEvent;
 import eventListener.infoBtnEvent_Company;
 import eventListener.InfoBtnEvent_ReceivedOrder;
+import eventListener.MiniTableEvent_byProduct;
 import eventListener.miniTableEvent_R_ReceivedOrder;
 import image.url;
 import layoutSetting.basicTabbedPane;
@@ -58,8 +62,8 @@ public class miniTableFactory{
 		return minitable;
 	}
 	public miniTable ReceivedOrderManagementTable(ReceivedOrderManagement orderManagement) {
-		String [] col = {"id","title","Info","담당자","주문 업체","주문 날짜","완료 기한","계약 유형","×"};
-		minitable = new miniTable(col,2,8);
+		String [] col = {"id","title","Info","담당자","주문 업체","주문 날짜","완료 기한","계약 유형","진행 현황","×"};
+		minitable = new miniTable(col,2,9);
 		iconBtnCell iconBtnCell_info= new iconBtnCell(url.LINK_ICON, 12, 12);
 		iconBtnCell_info.setEvent(new InfoBtnEvent_ReceivedOrder(orderManagement));
 		iconBtnCell iconBtnCell_del= new iconBtnCell(url.DELETE_ICON, 12, 12);
@@ -145,18 +149,45 @@ public class miniTableFactory{
 		return minitable;
 	}
 	public miniTable ProductionPlanManagement(basicTabbedPane tabbedPane) {
-		String [] col= {"id","수주 정보","Info","제품","수량","주문 날짜","완료 기한","예상 소요 시간","비고","×"};
-		minitable = new miniTable(col, 2, 8, 9);
+		String [] col= {"id","No.","생산 라인","수주 정보","Info","제품","부자재","lotNo","수량","주문 날짜"
+				,"완료 기한","시작 시간","소요 시간","완료 시간","비고","×"};
+		minitable = new miniTable(col,4,15,"GroupColumnType");
+		JTable table = minitable.table;
+		table.setColumnModel(new Group_TableColumnModel());
+		table.setTableHeader(new Group_TableHeader((Group_TableColumnModel) table.getColumnModel()));
+		table.setModel(minitable.model);
+		// Setup Column Groups
+		int count = 11;
+		Group_TableColumnModel GC = (Group_TableColumnModel) table.getColumnModel();
+		Group_Column column = new Group_Column("예상 소요 시간");
+		column.add(GC.getColumn(count));
+		column.add(GC.getColumn(count + 1));
+		column.add(GC.getColumn(count + 2));
+		GC.addGroupColumn(column);
 		
 		iconBtnCell iconBtnCell_info=new iconBtnCell(url.LINK_ICON, 12, 12);
+		iconBtnCell_info.setEvent(new InfoBtnEvent_ReceivedOrder(tabbedPane));
 		iconBtnCell iconBtnCell_del= new iconBtnCell(url.DELETE_ICON, 12, 12);
-		iconBtnCell_del.setEvent(new deleteRowEvent(minitable));
+		iconBtnCell_del.setEvent(new deleteRowEvent(minitable,"PRODUCTIONPLAN"));
 		
 		minitable.table.getColumn("×").setCellRenderer(new iconBtnCell(url.DELETE_ICON, 12, 12));
 		minitable.table.getColumn("×").setCellEditor(iconBtnCell_del);
 		minitable.table.getColumn("Info").setCellRenderer(new iconBtnCell(url.LINK_ICON, 12, 12));
 		minitable.table.getColumn("Info").setCellEditor(iconBtnCell_info);
 		
+		return minitable;
+	}
+	public miniTable ProcessManagement(basicTabbedPane tabbedPane) {
+		String [] col = {"id","제품명","product_id","생산 라인","CycleTime","×"};
+		minitable = new miniTable(col,1,null);
+		
+		iconBtnCell iconBtnCell_del= new iconBtnCell(url.DELETE_ICON, 12, 12);
+		iconBtnCell_del.setEvent(new deleteRowEvent(minitable));
+		
+		minitable.table.getColumn("×").setCellRenderer(new iconBtnCell(url.DELETE_ICON, 12, 12));
+		minitable.table.getColumn("×").setCellEditor(iconBtnCell_del);
+		
+		minitable.table.addMouseListener(new MiniTableEvent_byProduct(minitable));
 		return minitable;
 	}
 }

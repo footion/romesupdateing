@@ -14,7 +14,7 @@ import eventListener.editCompanyManager;
 import factory.componentFactory;
 import image.icon;
 import image.url;
-import layoutSetting.ImageLabel;
+import layoutSetting.ImageLabel_HJ;
 import layoutSetting.basicBorderPanel;
 import layoutSetting.basicIconBtn;
 import layoutSetting.basicPanel;
@@ -35,7 +35,7 @@ public class managerProfile extends basicPanel{
 	public basicIconBtn delBtn;
 	public int imageWidth=69;
 	public int imageHeight=82;
-	private ImageLabel imageLabel;
+	private ImageLabel_HJ imageLabel;
 	managerProfile profile;
 	private byte[] imageByte;//for update function 
 	public managerProfile() {
@@ -44,7 +44,7 @@ public class managerProfile extends basicPanel{
 		basicBorderPanel profilePhoto = new basicBorderPanel();
 		LineBorder border = new LineBorder(Color.LIGHT_GRAY, 1);
 		profilePhoto.setBorder(border);
-		profilePhoto.add(imageLabel=new ImageLabel(url.USER_ICON));
+		profilePhoto.add(imageLabel=new ImageLabel_HJ(url.USER_ICON));
 		imageLabel.setImageSize(imageWidth, imageHeight);
 		//profileData
 		basicPanel profileData = new basicPanel();
@@ -116,10 +116,10 @@ public class managerProfile extends basicPanel{
 		email.setText("E-mail : "+EMAIL);
 		memo.setText("¸Þ¸ð : "+MEMO);
 	}
-	public ImageLabel getImageLabel() {
+	public ImageLabel_HJ getImageLabel() {
 		return imageLabel;
 	}
-	public void setImageLabel(ImageLabel imageLabel) {
+	public void setImageLabel(ImageLabel_HJ imageLabel) {
 		this.imageLabel = imageLabel;
 	}
 	public byte[] getImageByte() {

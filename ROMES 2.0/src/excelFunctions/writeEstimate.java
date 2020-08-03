@@ -70,7 +70,7 @@ public class writeEstimate {
 	        File Internalfile = new File("excelOutput");
 	        Internalfile.mkdirs();
 	        FileOutputStream fos = null;
-			Filename= order_data.getTitle()+"_견적서_"+format.format(date)+".xlsx";
+			Filename= order_data.getTitle()+"_견적서"+".xlsx";
 	        try {
 	        	//Desktop
 	            fos = new FileOutputStream(file+File.separator+Filename);

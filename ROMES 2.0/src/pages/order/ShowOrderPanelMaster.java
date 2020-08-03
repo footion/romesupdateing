@@ -15,7 +15,6 @@ public class ShowOrderPanelMaster extends ColoredPanel {
 	JPanel topPanel = null, centerPanel= null;
 	public int keynumber;
 	public ShowOrderPanelMaster() {
-		System.out.println("create ShowOrderPanelMaster");
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setLayout(new BorderLayout(5, 5));
 		this.initTopPanel();

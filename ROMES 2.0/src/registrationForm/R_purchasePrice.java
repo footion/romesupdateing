@@ -30,7 +30,7 @@ import layoutSetting.basicPanel;
 import layoutSetting.basicTabbedPane;
 import layoutSetting.basicTextField;
 import layoutSetting.doubleButtonPanel;
-import layoutSetting.ImageLabel;
+import layoutSetting.ImageLabel_HJ;
 import layoutSetting.miniTable;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
@@ -73,7 +73,7 @@ public class R_purchasePrice extends basicPanel{
 	private int ProductKey;
 	basicTabbedPane tabbedPane;
 	componentFactory componentFactory;
-	public ImageLabel imageLabel;
+	public ImageLabel_HJ imageLabel;
 	public doubleButtonPanel buttonPanel;
 	public R_purchasePrice(basicTabbedPane TabbedPane) {
 		tabbedPane=TabbedPane;
@@ -205,7 +205,7 @@ public class R_purchasePrice extends basicPanel{
 		basicBorderPanel imagePanel = new basicBorderPanel();
 		imagePanel.setBorder(new LineBorder(colorFactory.GRAY, 1));
 		imagePanel.setPreferredSize(new Dimension(130,100));
-		imageLabel = new ImageLabel(url.IMAGE_ICON);
+		imageLabel = new ImageLabel_HJ(url.IMAGE_ICON);
 		imageLabel.setImageSize(120, 90);
 		imagePanel.add(imageLabel);
 		namepanel.add(imagePanel, "14, 1, center, center");

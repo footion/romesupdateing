@@ -69,10 +69,10 @@ public class ReceivedOrderManagement extends basicTabbedPane{
 			for(Received_order_history data : datas) {
 				if(data.getOrdered_company()!=null) {
 					miniTable.model.addRow(new Object[] {data.getId(),data.getTitle(),"",data.getManager()
-							,data.getOrdered_company().getCompanyName(),data.getOrder_date(),data.getDeadline(),data.getType(),""});
+							,data.getOrdered_company().getCompanyName(),data.getOrder_date(),data.getDeadline(),data.getType(),drawProgress(data),""});
 					}else {
 						miniTable.model.addRow(new Object[] {data.getId(),data.getTitle(),"",data.getManager()
-								,"",data.getOrder_date(),data.getDeadline(),data.getType(),""});
+								,"",data.getOrder_date(),data.getDeadline(),data.getType(),drawProgress(data),""});
 					}
 				}
 			hibernate.transaction.commit();
@@ -87,5 +87,23 @@ public class ReceivedOrderManagement extends basicTabbedPane{
 	void setEvent() {
 		buttonPanel.rightBtn.addActionListener(new sendEstimateEvent(miniTable.table));
 		buttonPanel.leftBtn.addActionListener(new newOrderEvent(orderManagement));
+	}
+	String drawProgress(Received_order_history data) {
+		String progress=null;
+		if(data.isProductPlan()==true) {
+			progress= "생산 계획";
+			if(data.isProductOrder()==true) {
+				progress= "생산 지시";
+				if(data.isProductRelease()==true) {
+					progress="출고";
+					if(data.isProductShipment()==true) {
+						progress="출하";
+					}
+				}
+			}
+		}else {
+			progress = "주문 접수";
+		}
+		return progress;
 	}
 }

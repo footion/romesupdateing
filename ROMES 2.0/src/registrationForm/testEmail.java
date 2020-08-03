@@ -27,7 +27,7 @@ public class testEmail {
     static final String FROMNAME = "이메일 테스트";
     static final String TO = "hjkim2@robogates.com";
     static final String SMTP_USERNAME = "kxzcvtbot@gmail.com";
-    static final String SMTP_PASSWORD ="a";
+    static final String SMTP_PASSWORD ="ads485912^^!";
     
     static final String HOST = "smtp.gmail.com";
     static final int PORT = 25;

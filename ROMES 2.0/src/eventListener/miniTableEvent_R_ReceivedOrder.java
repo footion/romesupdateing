@@ -12,7 +12,6 @@ import javax.swing.ListModel;
 
 import factory.stringFactory;
 import layoutSetting.miniTable;
-import registrationForm.R_company;
 import registrationForm.R_receivedOrder;
 import selectFrame.selectFrame;
 

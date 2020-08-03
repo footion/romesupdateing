@@ -3,10 +3,7 @@ package registrationForm;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
@@ -19,38 +16,36 @@ import javax.swing.border.TitledBorder;
 
 import org.hibernate.Session;
 
-import Dao.ReceivedOrderDAO;
-import entity.ReceivedOrderProduct;
 import entity.Received_order_history;
-import eventListener.R_ProductionPlanEvent;
+import eventListener.R_ProductionPlanInfoEvent;
+import eventListener.R_ProductionPlanSubmitEvent;
 import factory.colorFactory;
-import functions.method;
 import hibernate.hibernate;
 import layoutSetting.basicBorderPanel;
 import layoutSetting.basicBtn;
 import layoutSetting.basicFrame;
 import layoutSetting.basicPanel;
-import layoutSetting.basicTextArea;
 import layoutSetting.miniTable;
 import message.errorMessage;
+import pages.ProductionPlanManagement;
 
 @SuppressWarnings("serial")
 public class R_ProductionPlan extends basicFrame{
 	miniTable miniTable;
 	basicPanel pageEndPanel;
 	R_ProductionPlan frame;
-	public static void main(String[] args) {
-		new R_ProductionPlan("");
-	}
-	public R_ProductionPlan(String title) {
-		super(title);
+	ProductionPlanManagement TabbedPane;
+	basicBtn submit;
+	public R_ProductionPlan(ProductionPlanManagement planManagement) {
+		super("Submit frame");
 		frame=this;
+		this.TabbedPane=planManagement;
 		String [] col = {"id","title","담당자","주문 업체","주문 날짜","완료 기한","계약 유형"};
 		miniTable= new miniTable(col);
 		//NorthPanel
 		basicBorderPanel northPanel = new basicBorderPanel(colorFactory.GRAY,1);
 		northPanel.setLayout(new FlowLayout(FlowLayout.LEADING));
-		basicBtn submit = new basicBtn("전송");
+		submit = new basicBtn("전송");
 		northPanel.add(submit);
 		
 		//CenterPanel
@@ -83,26 +78,24 @@ public class R_ProductionPlan extends basicFrame{
 		//this.setResizable(false);
 	}
 	private void addEvent() {
-		miniTable.table.addMouseListener(new R_ProductionPlanEvent(frame));
+		miniTable.table.addMouseListener(new R_ProductionPlanInfoEvent(frame));
+		submit.addActionListener(new R_ProductionPlanSubmitEvent(this));
 	}
 	public miniTable getMiniTable() {
 		return miniTable;
 	}
-	public void setMiniTable(miniTable miniTable) {
-		this.miniTable = miniTable;
-	}
 	public basicPanel getPageEndPanel() {
 		return pageEndPanel;
 	}
-	public void setPageEndPanel(basicPanel pageEndPanel) {
-		this.pageEndPanel = pageEndPanel;
+	public ProductionPlanManagement getTabbedPane() {
+		return TabbedPane;
 	}
 	void StartData() {
 		try (Session session = hibernate.factory.openSession()){
 			hibernate.transaction = session.beginTransaction();
 			ArrayList<Received_order_history> datas = (ArrayList<Received_order_history>) session.createCriteria(Received_order_history.class).list();
 			for(Received_order_history data : datas) {
-				if(data.getOrdered_company()!=null)
+				if(data.isProductPlan()==false)
 					miniTable.model.addRow(new Object[] {data.getId(),data.getTitle(),data.getManager()
 							,data.getOrdered_company().getCompanyName(),data.getOrder_date(),data.getDeadline(),data.getType()});
 				}

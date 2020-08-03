@@ -280,7 +280,6 @@ public class FormUpdatePage extends ColoredPanel {
 		});
 		productType.setSelectedIndex(0);
 		
-		
 		panel_2.add(productType, "3, 1, fill, center");
 		
 		JLabel label = new JLabel("위치정보");
