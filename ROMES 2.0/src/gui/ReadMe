@@ -1,0 +1,5 @@
+이곳은 gui 큰 틀을 담당하는 패키지이다.
+
+메인 프로그램을 실행시키면 나오는 로그인 화면(LoginFram)과 메인 프로그램 화면(NewFrameForMASTER)java 코드를 가지고 있다.
+
+
